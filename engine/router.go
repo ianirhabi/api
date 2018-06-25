@@ -12,7 +12,7 @@ type RouteHandlers interface {
 var handlers = map[string]RouteHandlers{}
 
 func Router() *echo.Echo {
-	engine := cuxs.New()
+	engine := irhabi.New()
 	v := engine.Group("v1/")
 	if len(handlers) > 0 {
 		for p, h := range handlers {

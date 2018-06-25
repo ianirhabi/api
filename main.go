@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/alfatih/irhabi/irhabi"
 	//"github.com/astaxie/beego/orm"
 
 	"github.com/alfatih/beego/orm"
-	"github.com/cuxs/cuxs"
 	_ "github.com/go-sql-driver/mysql"
 	"retrobarbershop.com/retro/api/engine"
 	"retrobarbershop.com/retro/api/model"
@@ -65,7 +65,7 @@ func init() {
 
 func main() {
 	// Start server
-	cuxs.StartServer(engine.Router())
+	irhabi.StartServer(engine.Router())
 }
 
 /**
