@@ -127,6 +127,7 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 		} else {
 			b.Resp = "Maaf Anda Gagal Upload"
 			fmt.Println("Maaf tidak bisa update ", &b)
+			return c.JSON(http.StatusCreated, &b)
 		}
 	}
 	return e
