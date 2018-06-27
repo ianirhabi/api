@@ -62,8 +62,8 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 
 type lod struct {
 	Upload string `json:"upload"`
-	Resp   string
-	ID     int64 `json:"id"`
+	Resp   string `json:"respon"`
+	ID     int64  `json:"id"`
 }
 
 var b lod
