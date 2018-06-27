@@ -119,7 +119,7 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 		fmt.Println("masuk id nama foto "+" ini id nya ", b.ID, " ini nama foto ", b.Upload)
 		uon := new(model.User)
 		o := orm.NewOrm()
-		o.Raw("update FROM user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(uon)
+		o.Raw("update user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(uon)
 		return c.JSON(http.StatusCreated, &b)
 	}
 	return e
