@@ -83,12 +83,12 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 		return err
 	}
 	files := form.File["cycle"]
-<<<<<<< HEAD
+
 
 	fmt.Println("filenya", files[0])
-=======
+
 	fmt.Println("nama ", b.Upload)
->>>>>>> a9b0372d926b4f77c1d2f425bfbeae7e681fcb87
+
 	for _, file := range files {
 		// Source
 		src, err := file.Open()
