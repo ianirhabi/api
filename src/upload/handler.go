@@ -117,10 +117,10 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 	if err := c.Bind(&b); err == nil {
 		fmt.Println("masuk id nama foto "+" ini id nya ", b.ID, " ini nama foto ", b.Upload)
-		uon := new(model.User)
+		var uon model.User
 		o := orm.NewOrm()
 		fmt.Println("e nya ", e)
-		if e = o.Raw("update user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(uon); e == nil {
+		if d := o.Raw("update user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(&uon); d == nil {
 			b.Resp = "Berhasil Upload"
 			fmt.Println(&b)
 			return c.JSON(http.StatusCreated, &b)
