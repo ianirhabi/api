@@ -55,5 +55,5 @@ func (h *Handler) create(c echo.Context) (e error) {
 }
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
-	return c.File("upload/cover.jpg")
+	return c.File("1.png")
 }
