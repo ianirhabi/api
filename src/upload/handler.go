@@ -57,8 +57,8 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 }
 func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	// Read form fields
-	//name := c.FormValue("name")
-	//email := c.FormValue("email")
+	name := c.FormValue("name")
+	email := c.FormValue("email")
 
 	//------------
 	// Read files
