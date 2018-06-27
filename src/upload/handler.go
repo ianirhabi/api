@@ -12,11 +12,12 @@ import (
 type Handler struct{}
 
 func (h *Handler) URLMapping(r *echo.Group) {
-	r.POST("", h.create)
+	r.POST("", h.createPhotoweb)
+	rr.POST("/android", h.createPhotoandroid)
 	r.GET("/", h.getphoto)
 }
 
-func (h *Handler) create(c echo.Context) (e error) {
+func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 	fmt.Println("Masuk Pertama")
 	// Read form fields
 	name := c.FormValue("name")
@@ -54,6 +55,44 @@ func (h *Handler) create(c echo.Context) (e error) {
 
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded successfully with fields name=%s and email=%s.</p>", file.Filename, name, email))
 }
+func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
+
+	//------------
+	// Read files
+	//------------
+
+	// Multipart form
+	form, err := c.MultipartForm()
+	if err != nil {
+		return err
+	}
+	files := form.File["cycle"]
+
+	for _, file := range files {
+		// Source
+		src, err := file.Open()
+		if err != nil {
+			return err
+		}
+		defer src.Close()
+
+		// Destination
+		dst, err := os.Create("upload/" + file.Filename)
+		if err != nil {
+			return err
+		}
+		defer dst.Close()
+
+		// Copy
+		if _, err = io.Copy(dst, src); err != nil {
+			return err
+		}
+
+	}
+
+	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and email=%s.</p>", len(files), name, email))
+}
+
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
