@@ -17,6 +17,7 @@ func (h *Handler) URLMapping(r *echo.Group) {
 }
 
 func (h *Handler) create(c echo.Context) (e error) {
+	fmt.Println("Masuk Pertama")
 	// Read form fields
 	name := c.FormValue("name")
 	email := c.FormValue("email")
