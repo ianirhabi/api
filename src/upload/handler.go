@@ -123,7 +123,7 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 		if d := o.Raw("update user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(&uon); d == nil {
 			b.Resp = "Berhasil Upload"
 			fmt.Println(&b)
-			return c.JSON(http.StatusCreated, &b)
+			return c.JSON(http.StatusCreated, uon)
 		} else {
 			b.Resp = "Maaf Anda Gagal Upload"
 			fmt.Println("Maaf tidak bisa update ", &b)
