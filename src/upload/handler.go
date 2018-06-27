@@ -63,7 +63,7 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 type lod struct {
 	Upload string `json:"upload"`
 	Resp   string
-	ID     string `json:"id"`
+	ID     int64 `json:"id"`
 }
 
 var b lod
@@ -84,10 +84,6 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 		return err
 	}
 	files := form.File["cycle"]
-<<<<<<< HEAD
-=======
-
->>>>>>> e49e4df4dc12884cf09e2a9b6730266461f533eb
 
 	fmt.Println("filenya", files[0])
 
@@ -120,7 +116,7 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 
 func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 	if err := c.Bind(&b); err == nil {
-		fmt.Println("masuk id nama foto "+" ini id nya ", b.ID+" ini nama foto ", b.Upload)
+		fmt.Println("masuk id nama foto "+" ini id nya ", b.ID, " ini nama foto ", b.Upload)
 		uon := new(model.User)
 		o := orm.NewOrm()
 		o.Raw("update FROM user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(uon)
