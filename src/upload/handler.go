@@ -55,5 +55,6 @@ func (h *Handler) create(c echo.Context) (e error) {
 }
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
+	fmt.Println("welcome")
 	return c.File("1.png")
 }
