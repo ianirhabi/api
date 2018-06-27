@@ -119,6 +119,7 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 		fmt.Println("masuk id nama foto "+" ini id nya ", b.ID, " ini nama foto ", b.Upload)
 		uon := new(model.User)
 		o := orm.NewOrm()
+		fmt.Println("e nya ", e)
 		if e = o.Raw("update user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(uon); e == nil {
 			b.Resp = "Berhasil Upload"
 			fmt.Println(&b)
