@@ -56,6 +56,9 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded successfully with fields name=%s and email=%s.</p>", file.Filename, name, email))
 }
 func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
+	// Read form fields
+	//name := c.FormValue("name")
+	//email := c.FormValue("email")
 
 	//------------
 	// Read files
@@ -92,7 +95,6 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and email=%s.</p>", len(files), name, email))
 }
-
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
