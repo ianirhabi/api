@@ -13,7 +13,7 @@ type Handler struct{}
 
 func (h *Handler) URLMapping(r *echo.Group) {
 	r.POST("", h.createPhotoweb)
-	rr.POST("/android", h.createPhotoandroid)
+	r.POST("/android", h.createPhotoandroid)
 	r.GET("/", h.getphoto)
 }
 
@@ -57,6 +57,7 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 }
 func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	// Read form fields
+	fmt.Println("Masuk android")
 	name := c.FormValue("name")
 	email := c.FormValue("email")
 
