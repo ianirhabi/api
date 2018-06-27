@@ -6,6 +6,9 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/alfatih/beego/orm"
+	"retrobarbershop.com/retro/api/model"
+
 	"github.com/labstack/echo"
 )
 
@@ -15,6 +18,7 @@ func (h *Handler) URLMapping(r *echo.Group) {
 	r.POST("", h.createPhotoweb)
 	r.POST("/android", h.createPhotoandroid)
 	r.GET("/", h.getphoto)
+	r.POST("/namephoto", h.createnamePhoto)
 }
 
 func (h *Handler) createPhotoweb(c echo.Context) (e error) {
@@ -55,6 +59,14 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded successfully with fields name=%s and email=%s.</p>", file.Filename, name, email))
 }
+
+type lod struct {
+	Upload string `json:"upload"`
+	Resp   string
+}
+
+var b lod
+
 func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	// Read form fields
 	fmt.Println("Masuk android")
@@ -71,7 +83,7 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 		return err
 	}
 	files := form.File["cycle"]
-
+	fmt.Println("nama ", b.Upload)
 	for _, file := range files {
 		// Source
 		src, err := file.Open()
@@ -95,6 +107,20 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	}
 
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and email=%s.</p>", len(files), name, email))
+}
+
+func (h *Handler) createnamePhoto(c echo.Context) (e error) {
+	if err := c.Bind(&b); err == nil {
+
+		o := orm.NewOrm()
+		user := model.User{NamaFoto: b.Upload}
+		// insert
+		data, err := o.Insert(&user)
+		fmt.Printf("datanya ", data, err)
+
+		return c.JSON(http.StatusCreated, &b)
+	}
+	return e
 }
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
