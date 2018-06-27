@@ -72,6 +72,7 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	}
 	files := form.File["cycle"]
 
+	fmt.Println("filenya", files[0])
 	for _, file := range files {
 		// Source
 		src, err := file.Open()
@@ -99,5 +100,5 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
-	return c.File("upload/1.png")
+	return c.File("upload/1530071854757.jpg")
 }
