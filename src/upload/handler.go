@@ -22,7 +22,6 @@ func (h *Handler) URLMapping(r *echo.Group) {
 }
 
 func (h *Handler) createPhotoweb(c echo.Context) (e error) {
-	fmt.Println("Masuk Pertama")
 	// Read form fields
 	name := c.FormValue("name")
 	email := c.FormValue("email")
@@ -135,5 +134,5 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
-	return c.File("upload/1530111119777.jpg")
+	return c.File("upload/1530101000837.jpg")
 }
