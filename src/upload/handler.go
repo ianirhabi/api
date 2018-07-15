@@ -142,5 +142,5 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
-	return c.File("upload/1531647209901.jpg")
+	return c.File("upload/1531647617022.jpg")
 }
