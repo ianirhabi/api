@@ -76,7 +76,13 @@ func (h *Handler) del(c echo.Context) (e error) {
 
 func (h *Handler) getUser(c echo.Context) (e error) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	return c.JSON(http.StatusOK, users[id])
+	var uon model.User
+	fmt.Println("DEBUG e ", e)
+	if m := Getuser(id, uon); e == nil {
+		fmt.Println(m)
+		return c.JSON(http.StatusOK, users[id])
+	}
+	return e
 }
 
 func (h *Handler) getUserFoto(c echo.Context) (e error) {
