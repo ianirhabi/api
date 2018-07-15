@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/alfatih/beego/orm"
 	"retrobarbershop.com/retro/api/model"
@@ -17,7 +18,7 @@ type Handler struct{}
 func (h *Handler) URLMapping(r *echo.Group) {
 	r.POST("", h.createPhotoweb)
 	r.POST("/android", h.createPhotoandroid)
-	r.GET("/", h.getphoto)
+	r.GET("/:imagefile", h.getphoto)
 	r.POST("/namephoto", h.createnamePhoto)
 }
 
@@ -142,5 +143,7 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
-	return c.File("upload/1531647617022.jpg")
+	ifile, _ := strconv.Atoi(c.Param("imagefile"))
+	fmt.Println("idnya ", ifile)
+	return c.File("upload/ifile")
 }
