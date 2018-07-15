@@ -77,9 +77,7 @@ func (h *Handler) del(c echo.Context) (e error) {
 func (h *Handler) getUser(c echo.Context) (e error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var uon model.User
-	fmt.Println("DEBUG e ", e)
 	if cc, m := Getuser(id, uon); m == nil {
-		fmt.Println("debug ", cc)
 		return c.JSON(http.StatusOK, &cc)
 	}
 	return e
