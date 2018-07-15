@@ -79,8 +79,8 @@ func (h *Handler) getUser(c echo.Context) (e error) {
 	var uon model.User
 	fmt.Println("DEBUG e ", e)
 	if m := Getuser(id, uon); m != nil {
-		fmt.Println(m)
-		return c.JSON(http.StatusOK, users[id])
+		fmt.Println("debug ", m)
+		return c.JSON(http.StatusOK, &uon)
 	}
 	return e
 }
