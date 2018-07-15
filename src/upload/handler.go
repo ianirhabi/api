@@ -87,8 +87,8 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 
 	diks := form.File["diran"]
 	dd := diks[0]
-
-	fmt.Println("disknya", *dd)
+	a := dd.Filename
+	fmt.Println("disknya", a)
 
 	fmt.Println("filenya", files[0])
 
