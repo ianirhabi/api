@@ -18,6 +18,6 @@ func Getuser(id int, uon model.User) (e error) {
 			fmt.Println("usernya adalah ", uon)
 			return c.JSON(http.StatusOK, &uon)
 		}
-		return e
 	}
+	return e
 }
