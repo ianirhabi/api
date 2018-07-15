@@ -144,6 +144,8 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 func (h *Handler) getphoto(c echo.Context) (e error) {
 	fmt.Println("welcome")
 	ifile, _ := strconv.Atoi(c.Param("imagefile"))
-	fmt.Println("idnya ", ifile)
-	return c.File("upload/ifile")
+	var a = strconv.Itoa(ifile)
+
+	fmt.Println("idnya ", a)
+	return c.File("upload/" + a + ".jpg")
 }
