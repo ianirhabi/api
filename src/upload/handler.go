@@ -92,9 +92,7 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	bb := dd.Header
 
 	fmt.Println("disknya", a, " ", bb)
-
 	fmt.Println("filenya", files[0])
-
 	fmt.Println("nama ", b.Upload)
 
 	for _, file := range files {
