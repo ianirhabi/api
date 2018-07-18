@@ -27,13 +27,13 @@ var (
 var b user
 
 func (h *Handler) URLMapping(r *echo.Group) {
-	r.POST("", h.create)
+	r.POST("", h.login)
 	r.DELETE("/:id", h.del)
 	r.GET("/:id", h.getUser)
 	r.GET("/userfoto/", h.getUserFoto)
 }
 
-func (h *Handler) create(c echo.Context) (e error) {
+func (h *Handler) login(c echo.Context) (e error) {
 	b.Res = "tidak boleh"
 	if err := c.Bind(&b); err == nil {
 		if b.Name == "123" {
@@ -44,6 +44,7 @@ func (h *Handler) create(c echo.Context) (e error) {
 			return c.JSON(http.StatusNonAuthoritativeInfo, &b)
 		} else {
 			o := orm.NewOrm()
+
 			//user := model.User{User: b.Name,
 			//	Pass: b.Passw}
 			// insert

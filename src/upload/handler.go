@@ -37,8 +37,6 @@ func (h *Handler) createPhotoweb(c echo.Context) (e error) {
 		return err
 	}
 
-	fmt.Println("filenya", file)
-
 	src, err := file.Open()
 	if err != nil {
 		return err
@@ -70,7 +68,7 @@ var b lod
 
 func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	// Read form fields
-	fmt.Println("Masuk android")
+
 	name := c.FormValue("name")
 	email := c.FormValue("email")
 
@@ -122,17 +120,14 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 
 func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 	if err := c.Bind(&b); err == nil {
-		fmt.Println("masuk id nama foto "+" ini id nya ", b.ID, " ini nama foto ", b.Upload)
 		var uon model.User
 		o := orm.NewOrm()
-		fmt.Println("e nya ", e)
+
 		if d := o.Raw("update user set nama_foto = ? where id = ?", b.Upload, b.ID).QueryRow(&uon); d != nil {
 			b.Resp = "Berhasil Upload"
-			fmt.Println(&b)
 			return c.JSON(http.StatusCreated, &b)
 		} else {
 			b.Resp = "Maaf Anda Gagal Upload"
-			fmt.Println("Maaf tidak bisa update ", &b)
 			return c.JSON(http.StatusCreated, &b)
 		}
 	}
@@ -140,10 +135,7 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 }
 
 func (h *Handler) getphoto(c echo.Context) (e error) {
-	fmt.Println("welcome")
 	ifile, _ := strconv.Atoi(c.Param("imagefile"))
 	var a = strconv.Itoa(ifile)
-
-	fmt.Println("idnya ", a)
 	return c.File("upload/" + a + ".jpg")
 }
