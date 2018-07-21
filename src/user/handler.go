@@ -20,10 +20,6 @@ type user struct {
 	Usr   model.User
 }
 
-var (
-	users = map[int]*user{}
-	seq   = 1
-)
 var b user
 
 func (h *Handler) URLMapping(r *echo.Group) {
@@ -70,8 +66,8 @@ func (h *Handler) login(c echo.Context) (e error) {
 }
 
 func (h *Handler) del(c echo.Context) (e error) {
-	id, _ := strconv.Atoi(c.Param("id"))
-	delete(users, id)
+	//id, _ := strconv.Atoi(c.Param("id"))
+	//delete(users, id)
 	return c.NoContent(http.StatusNoContent)
 }
 
