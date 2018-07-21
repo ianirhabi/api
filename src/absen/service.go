@@ -27,7 +27,7 @@ func Getabsen(id int) (c interface{}, e error) {
 }
 
 func Req(d Request) (data interface{}, e error) {
-	fmt.Println("debug  ")
+
 	o := orm.NewOrm()
 	abs := model.Absen{Tanggal: d.Tanggal,
 		Waktu:   d.Waktu,
@@ -35,9 +35,11 @@ func Req(d Request) (data interface{}, e error) {
 		Hari:    d.Hari,
 		ID_USER: d.Iduser,
 		Lat:     d.Lat,
-		Long:    d.Long}
+		Long:    d.Long,
+		Usr:     d.User}
 	// ID_USER: d.Iduser}
+	fmt.Println("debug kah ", &abs)
 	b.Data = &abs
-	o.Insert(b)
-	return b, e
+	o.Insert(b.Data)
+	return b.Data, e
 }

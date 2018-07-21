@@ -24,7 +24,6 @@ func (h *Handler) absen(c echo.Context) (e error) {
 }
 
 func (h *Handler) kirimabsen(c echo.Context) (e error) {
-
 	var r Request
 	if err := c.Bind(&r); err == nil {
 		if data, e := Req(r); e == nil {
