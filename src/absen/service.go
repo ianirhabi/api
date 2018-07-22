@@ -12,6 +12,7 @@ type absen struct {
 }
 
 type Respon struct {
+	Res  string      `json:"res"`
 	Data interface{} `json:"data"`
 }
 
@@ -29,6 +30,9 @@ func Getabsen(id int) (c interface{}, e error) {
 func Req(d Request) (data interface{}, e error) {
 
 	o := orm.NewOrm()
+	update := orm.NewOrm()
+	var cc []*model.User
+	update.Raw("update user set usergroup= '2' where id = ?", d.Iduser).QueryRows(&cc)
 	abs := model.Absen{Tanggal: d.Tanggal,
 		Waktu:   d.Waktu,
 		Hadir:   d.Kehadiran,
@@ -36,10 +40,13 @@ func Req(d Request) (data interface{}, e error) {
 		ID_USER: d.Iduser,
 		Lat:     d.Lat,
 		Long:    d.Long,
-		Usr:     d.User}
+		Usr:     d.User,
+		Notif:   "1"}
 	// ID_USER: d.Iduser}
 	fmt.Println("debug kah ", &abs)
+	b.Res = "berhasil"
 	b.Data = &abs
+
 	o.Insert(b.Data)
-	return b.Data, e
+	return b, e
 }
