@@ -22,7 +22,15 @@ func Getabsen(id int) (c interface{}, e error) {
 	o := orm.NewOrm()
 	var cc []*model.Absen
 	o.Raw("select * from absen where id_user = ?", id).QueryRows(&cc)
+	b.Data = cc
+	return b, e
+}
 
+func Getabsenwithdate(from string, to string, id int) (c interface{}, e error) {
+	o := orm.NewOrm()
+	var cc []*model.Absen
+	o.Raw("SELECT * FROM absen where tanggal between '"+from+"' AND '"+to+"' AND id_user = ? ", id).QueryRows(&cc)
+	b.Res = "berhasil"
 	b.Data = cc
 	return b, e
 }
