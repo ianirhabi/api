@@ -10,3 +10,8 @@ type Request struct {
 	Long      string `json:"Long"`
 	User      string `json:"user"`
 }
+
+type Respon struct {
+	Res  string      `json:"res"`
+	Data interface{} `json:"data"`
+}

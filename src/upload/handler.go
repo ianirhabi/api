@@ -13,16 +13,17 @@ import (
 	"github.com/labstack/echo"
 )
 
-type Handler struct{}
+// type Handler struct{}
 
-func (h *Handler) URLMapping(r *echo.Group) {
-	r.POST("", h.createPhotoweb)
-	r.POST("/android", h.createPhotoandroid)
-	r.GET("/:imagefile", h.getphoto)
-	r.POST("/namephoto", h.createnamePhoto)
-}
+// func (h *Handler) URLMapping(r *echo.Group) {
+// 	r.POST("", h.createPhotoweb)
+// 	r.POST("/android", h.createPhotoandroid)
+// 	r.GET("/:imagefile", h.getphoto)
+// 	r.POST("/namephoto", h.createnamePhoto)
+// }
 
-func (h *Handler) createPhotoweb(c echo.Context) (e error) {
+// untuk web
+func CreatePhotoweb(c echo.Context) (e error) {
 	// Read form fields
 	name := c.FormValue("name")
 	email := c.FormValue("email")
@@ -66,7 +67,8 @@ type lod struct {
 
 var b lod
 
-func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
+//untuk android
+func CreatePhotoandroid(c echo.Context) (e error) {
 	// Read form fields
 
 	name := c.FormValue("name")
@@ -90,7 +92,6 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	bb := dd.Header
 
 	fmt.Println("disknya", a, " ", bb)
-	fmt.Println("filenya", files[0])
 	fmt.Println("nama ", b.Upload)
 
 	for _, file := range files {
@@ -102,7 +103,7 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 		defer src.Close()
 
 		// Destination
-		dst, err := os.Create("upload/" + file.Filename)
+		dst, err := os.Create("/home/programmerjalanan/go/src/retrobarbershop.com/retro/api/upload/" + file.Filename)
 		if err != nil {
 			return err
 		}
@@ -118,7 +119,7 @@ func (h *Handler) createPhotoandroid(c echo.Context) (e error) {
 	return c.HTML(http.StatusOK, fmt.Sprintf("<p>Uploaded successfully %d files with fields name=%s and email=%s.</p>", len(files), name, email))
 }
 
-func (h *Handler) createnamePhoto(c echo.Context) (e error) {
+func CreatenamePhoto(c echo.Context) (e error) {
 	if err := c.Bind(&b); err == nil {
 		var uon model.User
 		o := orm.NewOrm()
@@ -134,8 +135,8 @@ func (h *Handler) createnamePhoto(c echo.Context) (e error) {
 	return e
 }
 
-func (h *Handler) getphoto(c echo.Context) (e error) {
+func Getphoto(c echo.Context) (e error) {
 	ifile, _ := strconv.Atoi(c.Param("imagefile"))
 	var a = strconv.Itoa(ifile)
-	return c.File("upload/" + a + ".jpg")
+	return c.File("/home/programmerjalanan/go/src/retrobarbershop.com/retro/api/upload/" + a + ".jpg")
 }

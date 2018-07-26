@@ -7,15 +7,6 @@ import (
 	"retrobarbershop.com/retro/api/model"
 )
 
-type absen struct {
-	absen *model.Absen `json:"absen"`
-}
-
-type Respon struct {
-	Res  string      `json:"res"`
-	Data interface{} `json:"data"`
-}
-
 var b Respon
 
 func Getabsen(id int) (c interface{}, e error) {

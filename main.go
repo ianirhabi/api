@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/alfatih/irhabi/irhabi"
+
 	//"github.com/astaxie/beego/orm"
 
 	"github.com/alfatih/beego/orm"
@@ -60,14 +60,14 @@ import (
 //}
 func init() {
 	orm.RegisterModel(new(model.User))
-	orm.RegisterDataBase("default", "mysql", "root:ian!@#$%^@tcp(localhost:3306)/retrobarbershop_app?charset=utf8")
-	//orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(192.168.88.252:3306)/retrobarbershop_app?charset=utf8")
+	//orm.RegisterDataBase("default", "mysql", "root:ian!@#$%^@tcp(localhost:3306)/retrobarbershop_app?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(172.17.0.2:3306)/retrobarbershop_app?charset=utf8")
 
 }
 
 func main() {
 	// Start server
-	irhabi.StartServer(engine.Router())
+	engine.Router()
 }
 
 /**

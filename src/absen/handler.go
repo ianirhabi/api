@@ -8,15 +8,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-type Handler struct{}
-
-func (h *Handler) URLMapping(r *echo.Group) {
-	r.GET("/:id", h.absen)
-	r.POST("", h.kirimabsen)
-	r.GET("/:id/:from/:to", h.getabsendate)
-}
-
-func (h *Handler) absen(c echo.Context) (e error) {
+func Absendetail(c echo.Context) (e error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	if cc, m := Getabsen(id); m == nil {
 		return c.JSON(http.StatusOK, cc)
@@ -25,7 +17,7 @@ func (h *Handler) absen(c echo.Context) (e error) {
 	return e
 }
 
-func (h *Handler) getabsendate(c echo.Context) (e error) {
+func Getabsendate(c echo.Context) (e error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	from := c.Param("from")
 	to := c.Param("to")
@@ -39,7 +31,8 @@ func (h *Handler) getabsendate(c echo.Context) (e error) {
 	return e
 }
 
-func (h *Handler) kirimabsen(c echo.Context) (e error) {
+func Kirimabsen(c echo.Context) (e error) {
+	fmt.Println("masuk sini")
 	var r Request
 	if err := c.Bind(&r); err == nil {
 		if data, e := Req(r); e == nil {
