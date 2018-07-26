@@ -31,7 +31,7 @@ func Req(d Request) (data interface{}, e error) {
 	o := orm.NewOrm()
 	update := orm.NewOrm()
 	var cc []*model.User
-	update.Raw("update user set usergroup= '2' where id = ?", d.Iduser).QueryRows(&cc)
+	update.Raw("update user set usergroup= '2',latitude =?,longtitude=? where id = ?", d.Lat, d.Long, d.Iduser).QueryRows(&cc)
 	abs := model.Absen{Tanggal: d.Tanggal,
 		Waktu:   d.Waktu,
 		Hadir:   d.Kehadiran,

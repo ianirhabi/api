@@ -32,7 +32,7 @@ func Getabsendate(c echo.Context) (e error) {
 }
 
 func Kirimabsen(c echo.Context) (e error) {
-	fmt.Println("masuk sini")
+	fmt.Println("ini endpoint kirim absen ===== ")
 	var r Request
 	if err := c.Bind(&r); err == nil {
 		if data, e := Req(r); e == nil {
