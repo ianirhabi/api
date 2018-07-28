@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: 18.188.151.231    Database: retrobarbershop_app
+-- Host: 192.168.88.252    Database: retrobarbershop_app
 -- ------------------------------------------------------
--- Server version	5.7.22-0ubuntu0.16.04.1
+-- Server version	5.7.22-0ubuntu18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `absen` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,6 @@ CREATE TABLE `absen` (
 
 LOCK TABLES `absen` WRITE;
 /*!40000 ALTER TABLE `absen` DISABLE KEYS */;
-INSERT INTO `absen` VALUES (80,'2018-07-22','23:48:57','hadir',26,'Sunday','-6.1793658','106.7348319','082188352121','1'),(81,'2018-07-22','23:49:47','hadir',27,'Sunday','-6.1793937','106.7348369','admin','1'),(82,'2018-07-23','0:04:48','hadir',26,'Monday','-6.1793658','106.7348319','082188352121','1'),(83,'2018-07-23','1:32:34','hadir',26,'Monday','-6.1793658','106.7348319','082188352121','1'),(84,'2018-07-23','1:33:02','hadir',26,'Monday','-6.1793658','106.7348319','082188352121','1'),(85,'2018-07-23','19:49:13','hadir',26,'Monday','-6.1753749','106.7381895','082188352121','1'),(86,'2018-07-23','19:59:00','hadir',26,'Monday','-6.1793658','106.7348319','082188352121','1'),(87,'2018-07-23','19:59:13','hadir',27,'Monday','-6.177623','106.7363024','admin','1'),(88,'2018-07-23','22:14:15','hadir',27,'Monday','-6.1793658','106.7348319','admin','1'),(89,'2018-07-25','0:20:24','hadir',26,'Wednesday','-6.1793658','106.7348319','082188352121','1'),(90,'2018-07-25','0:30:42','hadir',27,'Wednesday','-6.1793658','106.7348319','superadmin','1'),(91,'2018-07-25','0:31:58','hadir',27,'Wednesday','-6.1793658','106.7348319','superadmin','1');
 /*!40000 ALTER TABLE `absen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,15 +58,17 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(45) NOT NULL,
-  `usergroup` varchar(45) DEFAULT NULL,
+  `notifikasi` varchar(45) DEFAULT NULL,
   `user_retro` varchar(45) DEFAULT NULL,
   `password_retro` varchar(45) DEFAULT NULL,
   `latitude` varchar(45) DEFAULT NULL,
   `longtitude` varchar(45) DEFAULT NULL,
   `foto` varchar(45) DEFAULT NULL,
-  `nama_foto` varchar(40) DEFAULT 'null',
+  `nama_foto` varchar(40) DEFAULT NULL,
+  `usergroup` varchar(45) DEFAULT NULL,
+  `ianmonitor` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +77,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (26,'andrian latif','1','082188352121','ian123456',NULL,NULL,NULL,'1532501809432.jpg'),(27,'sysadmin','1','superadmin','123456',NULL,NULL,NULL,'1532350956151.jpg');
+INSERT INTO `user` VALUES (27,'rio latif','0','superadmin','123456',NULL,NULL,NULL,'1532795823049.jpg','1',''),(28,'safira','0','admin','123456',NULL,NULL,NULL,'1532797160531.jpg','2',''),(29,'Programmer Jalanan','0','082188352121','123456','-6.1791724','106.7349972',NULL,'1532796346433.jpg','3',NULL),(30,'irhabi','0','082188352122','123456','-6.1793658','106.7348319',NULL,'1532748231871.jpg','3',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -89,4 +90,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-25 14:09:00
+-- Dump completed on 2018-07-28 15:08:23
