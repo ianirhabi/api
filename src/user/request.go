@@ -21,3 +21,7 @@ type Respons struct {
 	Jam    time.Time   `json:"Last_login,omitempty"`
 	Data   interface{} `json:"data"`
 }
+
+type UpdateRequest struct {
+	Password string `json:"password"`
+}
