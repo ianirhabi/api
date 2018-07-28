@@ -33,6 +33,7 @@ func Router() {
 	endpoin_user.DELETE("/user/:id", user.Del)
 	endpoin_user.GET("/:id", user.GetUser)
 	endpoin_user.GET("", user.GetAllUser)
+	endpoin_user.PUT("/:id", user.UpdateUser)
 
 	endpoin_upload := e.Group("/retrobarbershop/upload")
 	endpoin_upload.POST("", upload.CreatePhotoweb)

@@ -43,3 +43,13 @@ func GetAllUser(c echo.Context) (e error) {
 	}
 	return e
 }
+func UpdateUser(c echo.Context) (e error) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	var r UpdateRequest
+	if err := c.Bind(&r); err == nil {
+		if cc, m := Updateuser(r, id); m == nil {
+			return c.JSON(http.StatusOK, &cc)
+		}
+	}
+	return e
+}
