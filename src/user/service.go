@@ -72,17 +72,18 @@ func Deleteuser(id int) (d interface{}, e error) {
 	o := orm.NewOrm()
 	var res Respons
 	var uon model.User
-	fmt.Println("asdasdasad")
+	fmt.Println("debug =========== ", id)
 	if d := o.Raw("SELECT * FROM user where id=?", id).QueryRow(&uon); d == nil {
+		o.Raw("delete from absen where id_user = ? ", id).QueryRow(&uon)
 		if x := o.Raw("delete from user where id = ? ", id).QueryRow(&uon); x != nil {
 			res.Status = "sukses"
 			res.Data = "Anda Telah Berhasil Delete User"
+			fmt.Println("berhasil ================== ")
 		} else {
-			fmt.Println("masuk sini")
+			fmt.Println("masuk sini gagal")
 		}
 	} else {
-		fmt.Println("haisdasasd")
-		res.Status = "gaga"
+		res.Status = "gagal"
 		res.Data = "Anda gagal delete User"
 	}
 	return res, e
