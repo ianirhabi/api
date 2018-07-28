@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -21,9 +22,12 @@ func Login(c echo.Context) (e error) {
 }
 
 func Del(c echo.Context) (e error) {
-	//id, _ := strconv.Atoi(c.Param("id"))
-	//delete(users, id)
-	return c.NoContent(http.StatusNoContent)
+	id, _ := strconv.Atoi(c.Param("id"))
+	fmt.Println("idnya", id)
+	if data, er := Deleteuser(id); er == nil {
+		return c.JSON(http.StatusOK, &data)
+	}
+	return e
 }
 
 func GetUser(c echo.Context) (e error) {

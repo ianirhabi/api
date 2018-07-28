@@ -30,7 +30,7 @@ func Router() {
 	endpoin_user := e.Group("/retrobarbershop/user")
 	//r.Use(middleware.JWT([]byte("secret")))
 	endpoin_user.POST("/login", user.Login)
-	endpoin_user.DELETE("/user/:id", user.Del)
+	endpoin_user.DELETE("/:id", user.Del)
 	endpoin_user.GET("/:id", user.GetUser)
 	endpoin_user.GET("", user.GetAllUser)
 	endpoin_user.PUT("/:id", user.UpdateUser)

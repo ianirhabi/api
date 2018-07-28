@@ -67,3 +67,23 @@ func Updateuser(Req UpdateRequest, id int) (d interface{}, e error) {
 	}
 	return res, e
 }
+
+func Deleteuser(id int) (d interface{}, e error) {
+	o := orm.NewOrm()
+	var res Respons
+	var uon model.User
+	fmt.Println("asdasdasad")
+	if d := o.Raw("SELECT * FROM user where id=?", id).QueryRow(&uon); d == nil {
+		if x := o.Raw("delete from user where id = ? ", id).QueryRow(&uon); x != nil {
+			res.Status = "sukses"
+			res.Data = "Anda Telah Berhasil Delete User"
+		} else {
+			fmt.Println("masuk sini")
+		}
+	} else {
+		fmt.Println("haisdasasd")
+		res.Status = "gaga"
+		res.Data = "Anda gagal delete User"
+	}
+	return res, e
+}

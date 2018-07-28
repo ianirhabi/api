@@ -1,7 +1,6 @@
 package absen
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -21,9 +20,6 @@ func Getabsendate(c echo.Context) (e error) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	from := c.Param("from")
 	to := c.Param("to")
-	fmt.Println("debug id", id)
-	fmt.Println("debug from", from)
-	fmt.Println("debug to", to)
 	if cc, m := Getabsenwithdate(from, to, id); m == nil {
 		return c.JSON(http.StatusOK, cc)
 		// return c.JSON(http.StatusOK, &cc)
@@ -32,7 +28,6 @@ func Getabsendate(c echo.Context) (e error) {
 }
 
 func Kirimabsen(c echo.Context) (e error) {
-	fmt.Println("ini endpoint kirim absen ===== ")
 	var r Request
 	if err := c.Bind(&r); err == nil {
 		if data, e := Req(r); e == nil {
