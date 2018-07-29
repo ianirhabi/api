@@ -103,7 +103,7 @@ func CreatePhotoandroid(c echo.Context) (e error) {
 		defer src.Close()
 
 		// Destination
-		dst, err := os.Create("/home/programmerjalanan/go/src/retrobarbershop.com/retro/api/upload/" + file.Filename)
+		dst, err := os.Create("/root/go/src/retrobarbershop.com/retro/api/upload/" + file.Filename)
 		if err != nil {
 			return err
 		}
@@ -138,5 +138,5 @@ func CreatenamePhoto(c echo.Context) (e error) {
 func Getphoto(c echo.Context) (e error) {
 	ifile, _ := strconv.Atoi(c.Param("imagefile"))
 	var a = strconv.Itoa(ifile)
-	return c.File("/home/programmerjalanan/go/src/retrobarbershop.com/retro/api/upload/" + a + ".jpg")
+	return c.File("/root/go/src/retrobarbershop.com/retro/api/upload/" + a + ".jpg")
 }
