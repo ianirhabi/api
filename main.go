@@ -61,8 +61,9 @@ import (
 func init() {
 	orm.RegisterModel(new(model.User))
 	//orm.RegisterDataBase("default", "mysql", "root:ian!@#$%^@tcp(localhost:3306)/retrobarbershop_app?charset=utf8")
-	orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(192.168.88.252:3306)/retrobarbershop_app?charset=utf8")
+	//orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(192.168.88.252:3306)/retrobarbershop_app?charset=utf8")
 	//orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(172.17.0.2:3306)/retrobarbershop_app?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(localhost:3306)/retrobarbershopapp?charset=utf8")
 
 }
 
