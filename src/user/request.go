@@ -25,3 +25,11 @@ type Respons struct {
 type UpdateRequest struct {
 	Password string `json:"password"`
 }
+
+type AddRequest struct {
+	Name       string `json:"nama"`
+	User       string `json:"username"`
+	Pass       string `json:"password"`
+	Usergrup   string `json:"usergrup"`
+	Ianmonitor string `json:"controlian"`
+}

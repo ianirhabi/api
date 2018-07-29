@@ -10,6 +10,6 @@ type User struct {
 	NamaFoto   string `orm:"column(nama_foto);size(100)"`
 	Latitude   string `orm:"column(latitude);size(100)"`
 	Longtitude string `orm:"column(longtitude);size(100)"`
-	Usergrup   string `orm:"column(usergrup);size(100)"`
+	Usergrup   string `orm:"column(usergroup);size(100)"`
 	Ianmonitor string `orm:"column(ianmonitor);size(100)"`
 }

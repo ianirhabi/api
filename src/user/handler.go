@@ -57,3 +57,13 @@ func UpdateUser(c echo.Context) (e error) {
 	}
 	return e
 }
+
+func Adduser(c echo.Context) (e error) {
+	var r AddRequest
+	if err := c.Bind(&r); err == nil {
+		if cc, m := Add(r); m == nil {
+			return c.JSON(http.StatusCreated, &cc)
+		}
+	}
+	return e
+}
