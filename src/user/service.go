@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/alfatih/beego/orm"
+	jwt "github.com/dgrijalva/jwt-go"
 	"retrobarbershop.com/retro/api/model"
 )
 
@@ -21,9 +22,11 @@ func Getuser(id int, uon model.User) (cc model.User, e error) {
 func Getalluser(cc []*model.User) (d interface{}, e error) {
 	o := orm.NewOrm()
 	var res ResponsAlluser
-	if _, x := o.Raw("select * from user").QueryRows(&cc); x == nil {
-		res.Status = "berhasil"
-		res.Data = cc
+	if qs := o.QueryTable("user"); qs != nil { // mengecek tabel user apakah ada atau tidak... aklau tidak ada akan terjadi panic
+		if _, x := o.Raw("select * from user").QueryRows(&cc); x == nil {
+			res.Status = "berhasil"
+			res.Data = cc
+		}
 	}
 	return res, e
 }
@@ -47,6 +50,21 @@ func PostLogin(a Requestlogin) (res interface{}, e error) {
 			data.Status = "sukses"
 			data.Jam = time.Now()
 			data.Data = a
+
+			// Set claims
+			token := jwt.New(jwt.SigningMethodHS256)
+			claims := token.Claims.(jwt.MapClaims)
+			claims["username"] = "Jon Snow"
+			claims["password"] = true
+			claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+
+			// Generate encoded token and send it as response.
+			t, err := token.SignedString([]byte("secret"))
+			data.Token = t
+
+			if err != nil {
+				return data, err
+			}
 			break
 		} else {
 			data.Status = "gagal"

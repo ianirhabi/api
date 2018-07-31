@@ -27,19 +27,25 @@ func Router() {
 	// v := e.Group("/auth")
 	// v.POST("/login", auth.Login)
 
+	endpoin_user_login := e.Group("/retrobarbershop/user")
+	endpoin_user_login.POST("/login", user.Login)
+
 	endpoin_user := e.Group("/retrobarbershop/user")
 	//r.Use(middleware.JWT([]byte("secret")))
-	endpoin_user.POST("/login", user.Login)
+	endpoin_user.Use(middleware.JWT([]byte("secret")))
+	endpoin_user.GET("", user.GetAllUser)
 	endpoin_user.POST("", user.Adduser)
 	endpoin_user.DELETE("/:id", user.Del)
 	endpoin_user.GET("/:id", user.GetUser)
-	endpoin_user.GET("", user.GetAllUser)
 	endpoin_user.PUT("/:id", user.UpdateUser)
 
+	endpoin_getimage := e.Group("/retrobarbershop/getimage")
+	endpoin_getimage.GET("/:imagefile", upload.Getphoto)
+
 	endpoin_upload := e.Group("/retrobarbershop/upload")
+	endpoin_upload.Use(middleware.JWT([]byte("secret")))
 	endpoin_upload.POST("", upload.CreatePhotoweb)
 	endpoin_upload.POST("/android", upload.CreatePhotoandroid)
-	endpoin_upload.GET("/:imagefile", upload.Getphoto)
 	endpoin_upload.POST("/namephoto", upload.CreatenamePhoto)
 
 	e.Logger.Fatal(e.Start(":4500"))
