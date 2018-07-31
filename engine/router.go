@@ -17,9 +17,11 @@ func Router() {
 	// Restricted group
 	endpoin_absen := e.Group("/retrobarbershop/absen")
 	//r.Use(middleware.JWT([]byte("secret")))
+	endpoin_absen.Use(middleware.JWT([]byte("secret")))
 	endpoin_absen.GET("/:id", absen.Absendetail)
 	endpoin_absen.GET("/:id/:from/:to", absen.Getabsendate)
 	endpoin_absen.POST("", absen.Kirimabsen)
+	endpoin_absen.POST("/izin", absen.Kirimzin)
 	// untuk absen
 	// user := e.Group("")
 	// user.GET("/", usr.Getuser)

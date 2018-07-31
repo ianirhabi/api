@@ -9,6 +9,7 @@ type Request struct {
 	Lat       string `json:"Lat"`
 	Long      string `json:"Long"`
 	User      string `json:"user"`
+	Alasan    string `json:"alasan"`
 }
 
 type Respon struct {

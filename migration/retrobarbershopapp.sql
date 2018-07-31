@@ -32,11 +32,12 @@ CREATE TABLE `absen` (
   `lat` varchar(45) DEFAULT NULL,
   `long` varchar(45) DEFAULT NULL,
   `user` varchar(45) DEFAULT NULL,
-  `notif` varchar(45) DEFAULT NULL,
+  `alasan` varchar(45) DEFAULT NULL,
+  `pesan` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +46,7 @@ CREATE TABLE `absen` (
 
 LOCK TABLES `absen` WRITE;
 /*!40000 ALTER TABLE `absen` DISABLE KEYS */;
-INSERT INTO `absen` VALUES (1,'2018-07-29','18:28:36','hadir',29,'Minggu','-6.1793937','106.7348369','082188352121','1');
+INSERT INTO `absen` VALUES (1,'2018-07-29','18:28:36','hadir',29,'Minggu','-6.1793937','106.7348369','082188352121','1',NULL),(2,'2018-07-29','23:58:53','hadir',29,'Minggu','-6.1793658','106.7348319','082188352121','1',NULL),(4,'2018-07-31','20:46:06','hadir',62,'Tuesday','-6.1793875','106.7348358','sanrish','1',NULL),(5,'2018-07-31','20:49:22','hadir',62,'Tuesday','-6.1787078','106.7354212','sanrish','1',NULL),(6,'2018-07-31','123456','izin',29,'Selasa','4.44343','4.6767','082188352121','sakit',NULL),(7,'2018-07-31','123456','izin',29,'Selasa','4.44343','4.6767','082188352121','acar keluarga',NULL),(10,'2018-07-31','Tuesday 23:53:20 2018-07-31','izin',29,'Tuesday','-6.1793658','106.7348319','082188352121','sakit',NULL),(11,'2018-08-01','0:02:32','izin',29,'Wednesday','-6.1793658','106.7348319','082188352121','suatu hal lain-lain',NULL),(12,'2018-08-01','0:27:54','hadir',64,'Wednesday','-6.1793658','106.7348319','082188352121','',NULL),(13,'2018-08-01','0:28:30','izin',64,'Wednesday','-6.1793658','106.7348319','082188352121','sakit',NULL);
 /*!40000 ALTER TABLE `absen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +96,7 @@ CREATE TABLE `user` (
   `status` varchar(45) DEFAULT NULL,
   `created` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +105,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (27,'rio latif','0','superadmin','123456',NULL,NULL,NULL,'1532795823049.jpg','1','',NULL,NULL),(28,'safira','0','admin','123456',NULL,NULL,NULL,'1532797160531.jpg','2','',NULL,NULL),(29,'Programmer Jalanan','0','082188352121','123456','-6.1793937','106.7348369',NULL,'1532796346433.jpg','3','1',NULL,NULL),(30,'irhabi','0','082188352122','123456','-6.1793658','106.7348319',NULL,'1532748231871.jpg','3',NULL,NULL,NULL),(62,'Akun Demo','','sanrish','123456','','',NULL,'default.jpg','3','1',NULL,NULL);
+INSERT INTO `user` VALUES (27,'rio latif','0','superadmin','123456',NULL,NULL,NULL,'1533046031024.jpg','1','',NULL,NULL),(28,'safira','0','admin','safira123',NULL,NULL,NULL,'1533043129417.jpg','2','',NULL,NULL),(29,'Programmer Jalanan','0','082188352121','123456','-6.1793658','106.7348319',NULL,'1533050213794.jpg','3','1',NULL,NULL),(62,'Akun Demo','0','sanrish','123456','-6.1787078','106.7354212',NULL,'1533044671213.jpg','3','1',NULL,NULL),(64,'visa akun','0','082188352121','astaga','-6.1793658','106.7348319',NULL,'1533045750673.jpg','3','1',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -117,4 +118,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-29 12:54:36
+-- Dump completed on 2018-07-31 13:57:42

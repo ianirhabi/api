@@ -36,3 +36,14 @@ func Kirimabsen(c echo.Context) (e error) {
 	}
 	return e
 }
+
+func Kirimzin(c echo.Context) (e error) {
+	var r Request
+	if err := c.Bind(&r); err == nil {
+		if data, e := Izin(r); e == nil {
+			return c.JSON(http.StatusOK, &data)
+		}
+	}
+
+	return e
+}
