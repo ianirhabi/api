@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"retrobarbershop.com/retro/api/src/absen"
+	"retrobarbershop.com/retro/api/src/barang"
 	"retrobarbershop.com/retro/api/src/upload"
 	"retrobarbershop.com/retro/api/src/user"
 )
@@ -49,6 +50,13 @@ func Router() {
 	endpoin_upload.POST("", upload.CreatePhotoweb)
 	endpoin_upload.POST("/android", upload.CreatePhotoandroid)
 	endpoin_upload.POST("/namephoto", upload.CreatenamePhoto)
+
+	enpoin_barang := e.Group("/retrobarbershop/barang")
+	enpoin_barang.Use(middleware.JWT([]byte("secret")))
+	enpoin_barang.GET("/:usergrup", barang.Getbarang)
+	enpoin_barang.POST("/:usergrup/:user_id", barang.Postbarang)
+	enpoin_barang.PUT("/:usergrup/:user_id/:idbarang", barang.Updatebarang)
+	enpoin_barang.DELETE("/:usergrup/delete/:barangid", barang.Deletebarang)
 
 	e.Logger.Fatal(e.Start(":4500"))
 }

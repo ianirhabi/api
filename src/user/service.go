@@ -26,6 +26,8 @@ func Getalluser(cc []*model.User) (d interface{}, e error) {
 		if _, x := o.Raw("select * from user").QueryRows(&cc); x == nil {
 			res.Status = "berhasil"
 			res.Data = cc
+		} else {
+			res.Status = "gagal"
 		}
 	}
 	return res, e
@@ -46,6 +48,10 @@ func PostLogin(a Requestlogin) (res interface{}, e error) {
 		a.Usr.User = row.User
 		a.Usr.Pass = row.Pass
 		a.Usr.Notifikasi = row.Notifikasi
+		a.Usr.Usergrup = row.Usergrup
+		a.Usr.Ianmonitor = row.Ianmonitor
+		a.Usr.Name = row.Name
+		a.Usr.NamaFoto = row.NamaFoto
 		if row.User == a.Name && row.Pass == a.Passw {
 			data.Status = "sukses"
 			data.Jam = time.Now()

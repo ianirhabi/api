@@ -1,5 +1,11 @@
 package model
 
+import "github.com/alfatih/beego/orm"
+
+func init() {
+	orm.RegisterModel(new(User))
+}
+
 // Model Struct
 type User struct {
 	Id         int    `orm:"column(id);auto"`

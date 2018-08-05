@@ -7,7 +7,6 @@ import (
 	"github.com/alfatih/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"retrobarbershop.com/retro/api/engine"
-	"retrobarbershop.com/retro/api/model"
 )
 
 //type (
@@ -59,14 +58,13 @@ import (
 //	return c.NoContent(http.StatusNoContent)
 //}
 func init() {
-	orm.RegisterModel(new(model.User))
 	//orm.RegisterDataBase("default", "mysql", "root:ian!@#$%^@tcp(localhost:3306)/retrobarbershop_app?charset=utf8")
-	//orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(192.168.88.252:3306)/retrobarbershop_app?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(192.168.88.252:3306)/retrobarbershop_app?charset=utf8")
 	//orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(172.17.0.2:3306)/retrobarbershop_app?charset=utf8")
 	//orm.RegisterDataBase("default", "mysql", "root:ian123456@tcp(localhost:3306)/retrobarbershopapp?charset=utf8")
 
 	//AWS LIght
-	orm.RegisterDataBase("default", "mysql", "root:Juni1992@tcp(localhost:3306)/retrobarbershop_app?charset=utf8")
+	//orm.RegisterDataBase("default", "mysql", "root:Juni1992@tcp(localhost:3306)/retrobarbershop_app?charset=utf8")
 }
 
 func main() {

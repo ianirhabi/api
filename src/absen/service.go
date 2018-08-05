@@ -14,13 +14,9 @@ func Getabsen(id int) (c interface{}, e error) {
 	var cc []*model.Absen
 	if d, x := o.Raw("select * from absen where id_user = ?", id).QueryRows(&cc); x == nil {
 		fmt.Println("errornya ==== ", d, x)
-		if b.Data == nil {
-			b.Res = "gagal"
-			b.Data = cc
-		} else {
-			b.Res = "berhasil"
-			b.Data = cc
-		}
+		b.Res = "berhasil"
+		b.Data = cc
+
 	} else {
 		fmt.Println("errornya ==== ", d, x)
 		b.Res = "gagal"
@@ -31,9 +27,14 @@ func Getabsen(id int) (c interface{}, e error) {
 func Getabsenwithdate(from string, to string, id int) (c interface{}, e error) {
 	o := orm.NewOrm()
 	var cc []*model.Absen
-	o.Raw("SELECT * FROM absen where tanggal between '"+from+"' AND '"+to+"' AND id_user = ? ", id).QueryRows(&cc)
-	b.Res = "berhasil"
-	b.Data = cc
+	if _, d := o.Raw("SELECT * FROM absen where tanggal between '"+from+"' AND '"+to+"' AND id_user = ? ", id).QueryRows(&cc); d == nil {
+		fmt.Println("debug error === ", d)
+		b.Res = "berhasil"
+		b.Data = cc
+	} else {
+		fmt.Println("debug error === ", d)
+		b.Res = "gagal"
+	}
 	return b, e
 }
 
