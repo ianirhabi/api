@@ -40,7 +40,6 @@ func GetUser(c echo.Context) (e error) {
 }
 
 func GetAllUser(c echo.Context) (e error) {
-
 	var uon []*model.User
 	if cc, m := Getalluser(uon); m == nil {
 		return c.JSON(http.StatusOK, &cc)
