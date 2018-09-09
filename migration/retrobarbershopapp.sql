@@ -37,7 +37,7 @@ CREATE TABLE `absen` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `absen_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `absen` (
 
 LOCK TABLES `absen` WRITE;
 /*!40000 ALTER TABLE `absen` DISABLE KEYS */;
-INSERT INTO `absen` VALUES (1,'2018-07-29','18:28:36','hadir',29,'Minggu','-6.1793937','106.7348369','082188352121','1',NULL),(2,'2018-07-29','23:58:53','hadir',29,'Minggu','-6.1793658','106.7348319','082188352121','1',NULL),(4,'2018-07-31','20:46:06','hadir',62,'Tuesday','-6.1793875','106.7348358','sanrish','1',NULL),(5,'2018-07-31','20:49:22','hadir',62,'Tuesday','-6.1787078','106.7354212','sanrish','1',NULL),(6,'2018-07-31','123456','izin',29,'Selasa','4.44343','4.6767','082188352121','sakit',NULL),(7,'2018-07-31','123456','izin',29,'Selasa','4.44343','4.6767','082188352121','acar keluarga',NULL),(10,'2018-07-31','Tuesday 23:53:20 2018-07-31','izin',29,'Tuesday','-6.1793658','106.7348319','082188352121','sakit',NULL),(11,'2018-08-01','0:02:32','izin',29,'Wednesday','-6.1793658','106.7348319','082188352121','suatu hal lain-lain',NULL),(12,'2018-08-01','0:27:54','hadir',64,'Wednesday','-6.1793658','106.7348319','082188352121','',NULL),(13,'2018-08-01','0:28:30','izin',64,'Wednesday','-6.1793658','106.7348319','082188352121','sakit',NULL);
+INSERT INTO `absen` VALUES (4,'2018-07-31','20:46:06','hadir',62,'Tuesday','-6.1793875','106.7348358','sanrish','1',NULL),(5,'2018-07-31','20:49:22','hadir',62,'Tuesday','-6.1787078','106.7354212','sanrish','1',NULL),(6,'2018-07-31','123456','izin',29,'Selasa','4.44343','4.6767','082188352121','sakit',NULL),(7,'2018-07-31','123456','izin',29,'Selasa','4.44343','4.6767','082188352121','acar keluarga',NULL),(10,'2018-07-31','Tuesday 23:53:20 2018-07-31','izin',29,'Tuesday','-6.1793658','106.7348319','082188352121','sakit',NULL),(11,'2018-08-01','0:02:32','izin',29,'Wednesday','-6.1793658','106.7348319','082188352121','suatu hal lain-lain',NULL),(12,'2018-08-01','0:27:54','hadir',64,'Wednesday','-6.1793658','106.7348319','082188352121','',NULL),(13,'2018-08-01','0:28:30','izin',64,'Wednesday','-6.1793658','106.7348319','082188352121','sakit',NULL),(14,'2018-08-04','15:42:26','hadir',62,'Saturday','-6.1793937','106.7348369','sanrish','',NULL),(15,'2018-08-04','15:58:24','hadir',62,'Saturday','22.107531993662175','44.81406499002955','sanrish','',NULL);
 /*!40000 ALTER TABLE `absen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,6 +72,61 @@ CREATE TABLE `deactive_user` (
 LOCK TABLES `deactive_user` WRITE;
 /*!40000 ALTER TABLE `deactive_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `deactive_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_barang`
+--
+
+DROP TABLE IF EXISTS `item_barang`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_barang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_category` varchar(45) DEFAULT NULL,
+  `code_item` varchar(45) DEFAULT NULL,
+  `created` date DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_barang`
+--
+
+LOCK TABLES `item_barang` WRITE;
+/*!40000 ALTER TABLE `item_barang` DISABLE KEYS */;
+INSERT INTO `item_barang` VALUES (32,'ikan','543','2018-08-06',27);
+/*!40000 ALTER TABLE `item_barang` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_barang_detail`
+--
+
+DROP TABLE IF EXISTS `item_barang_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_barang_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) DEFAULT NULL,
+  `stock` varchar(45) DEFAULT NULL,
+  `harga_pokok_barang` int(10) DEFAULT NULL,
+  `harga_jual` int(10) DEFAULT NULL,
+  `code_category` varchar(45) DEFAULT NULL,
+  `deskripsi` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_barang_detail`
+--
+
+LOCK TABLES `item_barang_detail` WRITE;
+/*!40000 ALTER TABLE `item_barang_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_barang_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -105,7 +160,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (27,'rio latif','0','superadmin','123456',NULL,NULL,NULL,'1533046031024.jpg','1','',NULL,NULL),(28,'safira','0','admin','safira123',NULL,NULL,NULL,'1533043129417.jpg','2','',NULL,NULL),(29,'Programmer Jalanan','0','082188352121','123456','-6.1793658','106.7348319',NULL,'1533050213794.jpg','3','1',NULL,NULL),(62,'Akun Demo','0','sanrish','123456','-6.1787078','106.7354212',NULL,'1533044671213.jpg','3','1',NULL,NULL),(64,'visa akun','0','082188352121','astaga','-6.1793658','106.7348319',NULL,'1533045750673.jpg','3','1',NULL,NULL);
+INSERT INTO `user` VALUES (27,'rio latif','0','superadmin','123456',NULL,NULL,NULL,'1533046031024.jpg','1','',NULL,NULL),(28,'safira','0','admin','admin',NULL,NULL,NULL,'1533043129417.jpg','3','',NULL,NULL),(29,'Programmer Jalanan','0','082188352121','123456','-6.1793658','106.7348319',NULL,'1533050213794.jpg','3','1',NULL,NULL),(62,'Akun Demo','0','sanrish','123456','22.107531993662175','44.81406499002955',NULL,'1533371637489.jpg','3','1',NULL,NULL),(64,'visa akun','0','082188352121','astaga','-6.1793658','106.7348319',NULL,'1533045750673.jpg','3','1',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -118,4 +173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-31 13:57:42
+-- Dump completed on 2018-09-02 13:29:15

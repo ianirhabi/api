@@ -2,6 +2,7 @@ package barang
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/alfatih/beego/orm"
 	"retrobarbershop.com/retro/api/model"
@@ -11,22 +12,25 @@ func Inputitem(r Requestbarang, usergrup string, iduser int) (i interface{}, e e
 	var Res Respons
 	o := orm.NewOrm()
 
-	if usergrup == "1" || usergrup == "2" {
-		input := model.Item_barang{ItemCategory: r.Itemcategory,
-			CodeItem: r.CodeITEM,
-			Created:  r.Created,
-			UserId:   r.UserId}
+	for n := 0; n < 360000000; n++ {
+		CI := strconv.Itoa(n)
+		if usergrup == "1" || usergrup == "2" {
+			input := model.Item_barang{ItemCategory: r.Itemcategory,
+				CodeItem: CI,
+				Created:  r.Created,
+				UserId:   r.UserId}
 
-		if df, e := o.Insert(&input); e == nil {
-			Res.Status = "sukses"
-			Res.Data = input
-			fmt.Println("debug kirim barang sukses === ", df, e)
+			if df, e := o.Insert(&input); e == nil {
+				Res.Status = "sukses"
+				Res.Data = input
+				fmt.Println("debug kirim barang sukses === ", df, e)
+			} else {
+				fmt.Println("debug kirim barang gagal === ", df, e)
+				Res.Status = "gagal"
+			}
 		} else {
-			fmt.Println("debug kirim barang gagal === ", df, e)
-			Res.Status = "gagal"
+			Res.Status = "Anda Tidak di izinkan akses disini"
 		}
-	} else {
-		Res.Status = "Anda Tidak di izinkan akses disini"
 	}
 	return Res, e
 }
