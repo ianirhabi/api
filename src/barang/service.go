@@ -2,7 +2,6 @@ package barang
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/alfatih/beego/orm"
 	"retrobarbershop.com/retro/api/model"
@@ -12,26 +11,26 @@ func Inputitem(r Requestbarang, usergrup string, iduser int) (i interface{}, e e
 	var Res Respons
 	o := orm.NewOrm()
 
-	for n := 0; n < 360000000; n++ {
-		CI := strconv.Itoa(n)
-		if usergrup == "1" || usergrup == "2" {
-			input := model.Item_barang{ItemCategory: r.Itemcategory,
-				CodeItem: CI,
-				Created:  r.Created,
-				UserId:   r.UserId}
+	//for n := 0; n < 360000000; n++ {
+	//CI := strconv.Itoa(n) // konversi int ke string
+	if usergrup == "1" || usergrup == "2" {
+		input := model.Item_barang{ItemCategory: r.Itemcategory,
+			CodeItem: r.CodeITEM,
+			Created:  r.Created,
+			UserId:   r.UserId}
 
-			if df, e := o.Insert(&input); e == nil {
-				Res.Status = "sukses"
-				Res.Data = input
-				fmt.Println("debug kirim barang sukses === ", df, e)
-			} else {
-				fmt.Println("debug kirim barang gagal === ", df, e)
-				Res.Status = "gagal"
-			}
+		if df, e := o.Insert(&input); e == nil {
+			Res.Status = "sukses"
+			Res.Data = input
+			fmt.Println("debug kirim barang sukses === ", df, e)
 		} else {
-			Res.Status = "Anda Tidak di izinkan akses disini"
+			fmt.Println("debug kirim barang gagal === ", df, e)
+			Res.Status = "gagal"
 		}
+	} else {
+		Res.Status = "Anda Tidak di izinkan akses disini"
 	}
+	//}
 	return Res, e
 }
 
@@ -40,7 +39,7 @@ func Getitem(a string) (i interface{}, e error) {
 	o := orm.NewOrm()
 	var b Respons
 	if a == "1" || a == "2" {
-		if d, x := o.Raw("select * from item_barang").QueryRows(&barang); x == nil {
+		if d, x := o.Raw("SELECT * FROM retrobarbershop_app.item_barang order by id ASC limit 25").QueryRows(&barang); x == nil {
 
 			var count int
 			o.Raw("select count(*) as Count from item_barang").QueryRow(&count)
