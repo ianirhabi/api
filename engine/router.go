@@ -53,7 +53,7 @@ func Router() {
 
 	enpoin_barang := e.Group("/retrobarbershop/barang")
 	enpoin_barang.Use(middleware.JWT([]byte("secret")))
-	enpoin_barang.GET("/:usergrup", barang.Getbarang)
+	enpoin_barang.GET("/:usergrup/:page", barang.Getbarang)
 	enpoin_barang.POST("/:usergrup/:user_id", barang.Postbarang)
 	enpoin_barang.PUT("/:usergrup/:user_id/:idbarang", barang.Updatebarang)
 	enpoin_barang.DELETE("/:usergrup/delete/:barangid", barang.Deletebarang)

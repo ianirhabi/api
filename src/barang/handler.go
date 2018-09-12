@@ -10,7 +10,8 @@ import (
 
 func Getbarang(c echo.Context) (e error) {
 	usergrup := c.Param("usergrup")
-	if data, m := Getitem(usergrup); m == nil {
+	page := c.Param("page")
+	if data, m := Getitem(usergrup, page); m == nil {
 		return c.JSON(http.StatusOK, &data)
 	}
 	return e
