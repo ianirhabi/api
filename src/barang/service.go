@@ -46,7 +46,7 @@ func Getitem(a string, page string) (i interface{}, e error) {
 			fmt.Println("debug error ==== ", d, x)
 			b.Status = "berhasil"
 			b.Data = barang
-			b.Total = count
+			b.Total = page
 
 		} else {
 			fmt.Println("debug errornya ==== ", d, x)
@@ -68,10 +68,9 @@ func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int) (i i
 			barangitem.CodeItem = r.CodeITEM
 			barangitem.Created = r.Created
 			barangitem.UserId = r.UserId
-			if num, err := o.Update(&barangitem); err == nil {
+			if _, err := o.Update(&barangitem); err == nil {
 				Res.Data = barangitem
 				Res.Status = "berhasil"
-				Res.Total = int(num)
 			} else {
 				Res.Status = "gagal update"
 			}
@@ -89,9 +88,8 @@ func Deleteitem(usergrup string, idbarang int) (i interface{}, e error) {
 	var Res Respons
 
 	if usergrup == "1" || usergrup == "2" {
-		if num, err := o.Delete(&model.Item_barang{Id: idbarang}); err == nil {
+		if _, err := o.Delete(&model.Item_barang{Id: idbarang}); err == nil {
 			Res.Status = "sukses"
-			Res.Total = int(num)
 		} else {
 			Res.Status = "gagal"
 		}

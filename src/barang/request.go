@@ -10,5 +10,5 @@ type Requestbarang struct {
 type Respons struct {
 	Status string      `json:"status, omitempty"`
 	Data   interface{} `json:"data"`
-	Total  int         `json:"total, omitempty"`
+	Total  string      `json:"total, omitempty"`
 }
