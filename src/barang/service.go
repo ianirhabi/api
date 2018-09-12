@@ -39,7 +39,7 @@ func Getitem(a string) (i interface{}, e error) {
 	o := orm.NewOrm()
 	var b Respons
 	if a == "1" || a == "2" {
-		if d, x := o.Raw("SELECT * FROM retrobarbershop_app.item_barang order by id ASC limit 25").QueryRows(&barang); x == nil {
+		if d, x := o.Raw("SELECT * FROM item_barang order by id ASC limit 25").QueryRows(&barang); x == nil {
 
 			var count int
 			o.Raw("select count(*) as Count from item_barang").QueryRow(&count)
