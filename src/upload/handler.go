@@ -140,3 +140,14 @@ func Getphoto(c echo.Context) (e error) {
 	var a = strconv.Itoa(ifile)
 	return c.File("/home/ubuntu/go/src/retrobarbershop.com/retro/api/upload/" + a + ".jpg")
 }
+
+//delete file
+// func deleteFile() {
+// 	// delete file
+// 	var err = os.Remove(path)
+// 	if isError(err) {
+// 		return
+// 	}
+
+// 	fmt.Println("==> done deleting file")
+// }

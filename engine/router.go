@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"retrobarbershop.com/retro/api/src/absen"
 	"retrobarbershop.com/retro/api/src/barang"
+	"retrobarbershop.com/retro/api/src/barangdetail"
 	"retrobarbershop.com/retro/api/src/upload"
 	"retrobarbershop.com/retro/api/src/user"
 )
@@ -51,12 +52,19 @@ func Router() {
 	endpoin_upload.POST("/android", upload.CreatePhotoandroid)
 	endpoin_upload.POST("/namephoto", upload.CreatenamePhoto)
 
+	//enpoint barang
 	enpoin_barang := e.Group("/retrobarbershop/barang")
 	enpoin_barang.Use(middleware.JWT([]byte("secret")))
 	enpoin_barang.GET("/:usergrup/:page", barang.Getbarang)
 	enpoin_barang.POST("/:usergrup/:user_id", barang.Postbarang)
 	enpoin_barang.PUT("/:usergrup/:user_id/:idbarang", barang.Updatebarang)
 	enpoin_barang.DELETE("/:usergrup/delete/:barangid", barang.Deletebarang)
+
+	//enpoint barang detail
+	enpoint_brangdetail := e.Group("retrobarbershop/barangdetail")
+	enpoint_brangdetail.Use(middleware.JWT([]byte("secret")))
+	enpoint_brangdetail.GET("/:usergrup/:page/detail/:code_category", barangdetail.Getbd)
+	enpoint_brangdetail.POST("/:usergrup", barangdetail.PostDetailItem)
 
 	e.Logger.Fatal(e.Start(":4500"))
 }

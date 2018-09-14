@@ -60,8 +60,8 @@ func PostLogin(a Requestlogin) (res interface{}, e error) {
 			// Set claims
 			token := jwt.New(jwt.SigningMethodHS256)
 			claims := token.Claims.(jwt.MapClaims)
-			claims["username"] = "Jon Snow"
-			claims["password"] = true
+			// claims["username"] = "Jon Snow"
+			// claims["password"] = true
 			claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 			// Generate encoded token and send it as response.

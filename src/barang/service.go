@@ -10,22 +10,32 @@ import (
 func Inputitem(r Requestbarang, usergrup string, iduser int) (i interface{}, e error) {
 	var Res Respons
 	o := orm.NewOrm()
-
+	var validasi []*model.Item_barang
 	//for n := 0; n < 360000000; n++ {
 	//CI := strconv.Itoa(n) // konversi int ke string
 	if usergrup == "1" || usergrup == "2" {
-		input := model.Item_barang{ItemCategory: r.Itemcategory,
-			CodeItem: r.CodeITEM,
-			Created:  r.Created,
-			UserId:   r.UserId}
+		if d, x := o.Raw("select * from item_barang where code_item =?", r.CodeITEM).QueryRows(&validasi); x == nil {
+			if d == 0 {
+				fmt.Println("debug exist ", d)
+				input := model.Item_barang{ItemCategory: r.Itemcategory,
+					CodeItem: r.CodeITEM,
+					Created:  r.Created,
+					UserId:   r.UserId,
+				}
 
-		if df, e := o.Insert(&input); e == nil {
-			Res.Status = "sukses"
-			Res.Data = input
-			fmt.Println("debug kirim barang sukses === ", df, e)
-		} else {
-			fmt.Println("debug kirim barang gagal === ", df, e)
-			Res.Status = "gagal"
+				if df, e := o.Insert(&input); e == nil {
+					Res.Status = "sukses"
+					Res.Data = input
+					fmt.Println("debug kirim barang sukses === ", df, e)
+				} else {
+					fmt.Println("debug kirim barang gagal === ", df, e)
+					Res.Status = "gagal"
+				}
+			} else {
+				Res.Status = "gagal"
+				Res.Data = "kode yang Anda masukan sudah ada, coba kode yang lain"
+				fmt.Println("kode sudah ada ", d)
+			}
 		}
 	} else {
 		Res.Status = "Anda Tidak di izinkan akses disini"
@@ -40,14 +50,12 @@ func Getitem(a string, page string) (i interface{}, e error) {
 	var b Respons
 	if a == "1" || a == "2" {
 		if d, x := o.Raw("SELECT * FROM item_barang order by id ASC limit " + page).QueryRows(&barang); x == nil {
-
 			var count int
 			o.Raw("select count(*) as Count from item_barang").QueryRow(&count)
 			fmt.Println("debug error ==== ", d, x)
 			b.Status = "berhasil"
 			b.Data = barang
 			b.Total = page
-
 		} else {
 			fmt.Println("debug errornya ==== ", d, x)
 			b.Status = "gagal"
@@ -61,22 +69,36 @@ func Getitem(a string, page string) (i interface{}, e error) {
 func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int) (i interface{}, e error) {
 	var Res Respons
 	o := orm.NewOrm()
+	var validasi []*model.Item_barang
+
 	if usergrup == "1" || usergrup == "2" {
-		barangitem := model.Item_barang{Id: idbarang}
-		if o.Read(&barangitem) == nil {
-			barangitem.ItemCategory = r.Itemcategory
-			barangitem.CodeItem = r.CodeITEM
-			barangitem.Created = r.Created
-			barangitem.UserId = r.UserId
-			if _, err := o.Update(&barangitem); err == nil {
-				Res.Data = barangitem
-				Res.Status = "berhasil"
+		if d, x := o.Raw("select * from item_barang where code_item =? and item_category =?", r.CodeITEM, r.Itemcategory).QueryRows(&validasi); x == nil {
+			if d == 0 {
+				barangitem := model.Item_barang{Id: idbarang}
+				if o.Read(&barangitem) == nil {
+					barangitem.ItemCategory = r.Itemcategory
+					barangitem.CodeItem = r.CodeITEM
+					barangitem.Created = r.Created
+					barangitem.UserId = r.UserId
+					if _, err := o.Update(&barangitem); err == nil {
+						Res.Data = barangitem
+						Res.Status = "berhasil"
+					} else {
+						Res.Status = "gagal update"
+					}
+				} else {
+					Res.Status = "Tidak Ada di daftar list"
+				}
 			} else {
-				Res.Status = "gagal update"
+				Res.Status = "gagal"
+				Res.Data = "kode yang Anda masukan sudah ada, coba kode yang lain"
+				fmt.Println("kode sudah ada ", d)
 			}
 		} else {
-			Res.Status = "Tidak Ada di daftar list"
+			Res.Status = "gagal"
+			Res.Data = "somthing wrong"
 		}
+
 	} else {
 		Res.Status = "Anda Tidak di izinkan akses disini"
 	}
