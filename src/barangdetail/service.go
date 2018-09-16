@@ -88,6 +88,7 @@ func UpdateDetail(usergrup string, id int64, r UpdateBarangDetail) (d interface{
 			if d == 0 {
 				datadetail := model.Item_barang_detail{Id: id}
 				if o.Read(&datadetail) == nil {
+					fmt.Println("debug berhasil update", d)
 					datadetail.Code = r.Code
 					datadetail.Codecategory = r.Code_kategory
 					datadetail.UpdateDate = r.Created
@@ -116,6 +117,7 @@ func UpdateDetail(usergrup string, id int64, r UpdateBarangDetail) (d interface{
 			} else {
 				Res.Status = "false"
 				Res.Data = "kode sudah ada silahkan coba yang lain"
+				fmt.Println("debug berhasil update", d)
 				//konversi tipe data int ke tipe data string
 				var totalData = int64(d)
 				var str = strconv.FormatInt(totalData, 10)

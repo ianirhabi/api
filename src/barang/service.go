@@ -72,7 +72,7 @@ func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int64) (i
 	var validasi []*model.Item_barang
 
 	if usergrup == "1" || usergrup == "2" {
-		if d, x := o.Raw("select * from item_barang where code_item =? and item_category =?", r.CodeITEM, r.Itemcategory).QueryRows(&validasi); x == nil {
+		if d, x := o.Raw("select * from item_barang where code_item =?", r.CodeITEM).QueryRows(&validasi); x == nil {
 			if d == 0 {
 				barangitem := model.Item_barang{Id: idbarang}
 				if o.Read(&barangitem) == nil {
