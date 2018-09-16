@@ -32,7 +32,7 @@ func Inputitem(r Requestbarang, usergrup string, iduser int) (i interface{}, e e
 					Res.Status = "gagal"
 				}
 			} else {
-				Res.Status = "gagal"
+				Res.Status = "false"
 				Res.Data = "kode yang Anda masukan sudah ada, coba kode yang lain"
 				fmt.Println("kode sudah ada ", d)
 			}
@@ -49,7 +49,7 @@ func Getitem(a string, page string) (i interface{}, e error) {
 	o := orm.NewOrm()
 	var b Respons
 	if a == "1" || a == "2" {
-		if d, x := o.Raw("SELECT * FROM item_barang order by id ASC limit " + page).QueryRows(&barang); x == nil {
+		if d, x := o.Raw("SELECT * FROM item_barang order by id DESC limit " + page).QueryRows(&barang); x == nil {
 			var count int
 			o.Raw("select count(*) as Count from item_barang").QueryRow(&count)
 			fmt.Println("debug error ==== ", d, x)
@@ -66,7 +66,7 @@ func Getitem(a string, page string) (i interface{}, e error) {
 	return b, e
 }
 
-func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int) (i interface{}, e error) {
+func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int64) (i interface{}, e error) {
 	var Res Respons
 	o := orm.NewOrm()
 	var validasi []*model.Item_barang
@@ -84,13 +84,13 @@ func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int) (i i
 						Res.Data = barangitem
 						Res.Status = "berhasil"
 					} else {
-						Res.Status = "gagal update"
+						Res.Status = "gagal"
 					}
 				} else {
 					Res.Status = "Tidak Ada di daftar list"
 				}
 			} else {
-				Res.Status = "gagal"
+				Res.Status = "false"
 				Res.Data = "kode yang Anda masukan sudah ada, coba kode yang lain"
 				fmt.Println("kode sudah ada ", d)
 			}
@@ -105,15 +105,22 @@ func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int) (i i
 	return Res, e
 }
 
-func Deleteitem(usergrup string, idbarang int) (i interface{}, e error) {
+func Deleteitem(usergrup string, idbarang int64) (i interface{}, e error) {
 	o := orm.NewOrm()
 	var Res Respons
-
+	var delete []*model.Item_barang
 	if usergrup == "1" || usergrup == "2" {
-		if _, err := o.Delete(&model.Item_barang{Id: idbarang}); err == nil {
-			Res.Status = "sukses"
+		if f, status := o.Raw("delete from item_barang_detail where code_category=?", idbarang).QueryRows(&delete); status == nil {
+			if g, err := o.Delete(&model.Item_barang{Id: idbarang}); err == nil {
+				Res.Status = "sukses"
+				Res.Data = "berhasil menghapus data"
+			} else {
+				Res.Status = "gagal"
+				fmt.Println("debug gagal dua ", g)
+			}
 		} else {
 			Res.Status = "gagal"
+			fmt.Println("debug gagal ", f)
 		}
 	} else {
 		Res.Status = "Anda Tidak di izinkan"

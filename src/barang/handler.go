@@ -35,7 +35,7 @@ func Updatebarang(c echo.Context) (e error) {
 	idbarang, _ := strconv.Atoi(c.Param("idbarang"))
 	var r Requestbarang
 	if err := c.Bind(&r); err == nil {
-		if data, e := Updateitem(r, usergrup, iduser, idbarang); e == nil {
+		if data, e := Updateitem(r, usergrup, iduser, int64(idbarang)); e == nil {
 			return c.JSON(http.StatusCreated, &data)
 		}
 	}
@@ -48,7 +48,7 @@ func Deletebarang(c echo.Context) (e error) {
 
 	fmt.Println("idnya ", barangid, "errornya ", d)
 	//fmt.Println(usergrup)
-	if data, e := Deleteitem(usergrup, barangid); e == nil {
+	if data, e := Deleteitem(usergrup, int64(barangid)); e == nil {
 		return c.JSON(http.StatusOK, &data)
 	}
 	return e

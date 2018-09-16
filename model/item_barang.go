@@ -7,7 +7,7 @@ func init() {
 }
 
 type Item_barang struct {
-	Id           int    `orm:"column(id);auto"json:"id"`
+	Id           int64  `orm:"column(id);auto"json:"id"`
 	ItemCategory string `orm:"column(item_category);size(100);null"json:"item_category"`
 	CodeItem     string `orm:"column(code_item);size(100);null"json:"code_item"`
 	Created      string `orm:"column(created);size(100);null"json:"created"`

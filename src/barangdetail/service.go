@@ -12,7 +12,7 @@ func Getitemdetail(usrgrup string, page string, kt int) (d interface{}, e error)
 	o := orm.NewOrm()
 	var b Respons
 	if usrgrup == "1" || usrgrup == "2" {
-		if d, x := o.Raw("SELECT * FROM item_barang_detail  where code_category =? order by id ASC limit "+page, kt).QueryRows(&barangdetail); x == nil {
+		if d, x := o.Raw("SELECT * FROM item_barang_detail  where code_category =? order by id DESC limit "+page, kt).QueryRows(&barangdetail); x == nil {
 			fmt.Println("debug berhasil ==== ", d, x)
 			b.Status = "berhasil"
 			b.Data = barangdetail
