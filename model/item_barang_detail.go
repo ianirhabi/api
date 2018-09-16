@@ -7,7 +7,7 @@ func init() {
 }
 
 type Item_barang_detail struct {
-	Id                  int    `orm:"column(id);auto"json:"id"`
+	Id                  int64  `orm:"column(id);auto"json:"id"`
 	Code                string `orm:"column(code);size(100);null"json:"code"`
 	Stock               string `orm:"column(stock);size(100);null"json:"stock"`
 	Hargapokokpenjualan int64  `orm:"column(harga_pokok_barang);size(100);null"json:"harga_pokok"`

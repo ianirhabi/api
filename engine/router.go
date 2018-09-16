@@ -65,7 +65,8 @@ func Router() {
 	enpoint_brangdetail.Use(middleware.JWT([]byte("secret")))
 	enpoint_brangdetail.GET("/:usergrup/:page/detail/:code_category", barangdetail.Getbd)
 	enpoint_brangdetail.POST("/:usergrup", barangdetail.PostDetailItem)
-	// enpoint_brangdetail.DELETE("/:usergrup", barangdetail.DeleteDetailItem)
+	enpoint_brangdetail.DELETE("/:usergrup/delete/:id", barangdetail.DeleteDetailItem)
+	enpoint_brangdetail.PUT("/:usergrup/update/:id", barangdetail.UpdateDetailItem)
 
 	e.Logger.Fatal(e.Start(":4500"))
 }

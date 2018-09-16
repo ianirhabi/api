@@ -80,11 +80,13 @@ func Updateitem(r Requestbarang, usergrup string, iduser int, idbarang int64) (i
 					barangitem.CodeItem = r.CodeITEM
 					barangitem.Created = r.Created
 					barangitem.UserId = r.UserId
-					if _, err := o.Update(&barangitem); err == nil {
+					if stat, err := o.Update(&barangitem); err == nil {
 						Res.Data = barangitem
 						Res.Status = "berhasil"
 					} else {
 						Res.Status = "gagal"
+						Res.Data = stat
+						fmt.Println("debug gagal update", stat, err)
 					}
 				} else {
 					Res.Status = "Tidak Ada di daftar list"
