@@ -6,6 +6,7 @@ import (
 	"retrobarbershop.com/retro/api/src/absen"
 	"retrobarbershop.com/retro/api/src/barang"
 	"retrobarbershop.com/retro/api/src/barangdetail"
+	"retrobarbershop.com/retro/api/src/download"
 	"retrobarbershop.com/retro/api/src/upload"
 	"retrobarbershop.com/retro/api/src/user"
 )
@@ -45,6 +46,9 @@ func Router() {
 
 	endpoin_getimage := e.Group("/retrobarbershop/getimage")
 	endpoin_getimage.GET("/:imagefile", upload.Getphoto)
+
+	endpoin_getapk := e.Group("/retrobarbershop/download")
+	endpoin_getapk.GET("/apk", download.GetApk)
 
 	endpoin_upload := e.Group("/retrobarbershop/upload")
 	endpoin_upload.Use(middleware.JWT([]byte("secret")))
